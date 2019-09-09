@@ -12,25 +12,31 @@ request(weatherUrl, { json: true }, (err, body) => {
     console.log(content)
     
     app.get('/api_get', ( request,response) => {
-
-    
-        if (!content) {
+      if (!content) {
           console.log("No contacts found." );
         }
-        let copyData = content
-        let cityNameKey = {};
-        cityNameKey[cityName] = copyData
-        // console.log(cityNameKey);
-
-        var data1 = {};
-        data1.weather = []
-        data1.weather.push(cityNameKey)
-        response.json(data1);
+        var data = {};
+        data.weather_data = []
+        data.weather_data.push(content)
+        response.json(data);
       });
 
-    // app.post('/api_post', ( request,response) => {
+    app.post('/api_post', ( request,response) => {
+
+      var course = {
+        year:request.body.year
+      };
+      if (!content) {
+        console.log("No contacts found." );
+      }
       
-    // })
+      var data = {};
+      data.weather_data = []
+      data.weather_data.push(content)
+      data.weather_data.push(course)
+      response.send(data);
+      
+    });
 
   const hostname = 'localhost';
   const port = 4001;
