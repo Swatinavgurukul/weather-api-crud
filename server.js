@@ -12,13 +12,25 @@ request(weatherUrl, { json: true }, (err, body) => {
     console.log(content)
     
     app.get('/api_get', ( request,response) => {
+
     
         if (!content) {
           console.log("No contacts found." );
         }
-  
-        response.json(content);
+        let copyData = content
+        let cityNameKey = {};
+        cityNameKey[cityName] = copyData
+        // console.log(cityNameKey);
+
+        var data1 = {};
+        data1.weather = []
+        data1.weather.push(cityNameKey)
+        response.json(data1);
       });
+
+    // app.post('/api_post', ( request,response) => {
+      
+    // })
 
   const hostname = 'localhost';
   const port = 4001;
